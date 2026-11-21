@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#E53935">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.youtube.com https://s.ytimg.com https://accounts.google.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://accounts.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob: https://i.ytimg.com; connect-src https://script.google.com https://script.googleusercontent.com https://accounts.google.com; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>ลงชื่อรับรองการรับชมสื่อความปลอดภัยจากอัคคีภัย | โรงเรียนพยาบาลรามาธิบดี</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fire1:#FF6B35;--fire2:#E53935;--amber:#FFB300;
+  --ink:#131A2A;--ink2:#5A6478;--line:#E8EBF2;--bg:#F6F7FB;
+  --ok:#16A34A;--okbg:#E8F7EE;--bad:#DC2626;
+  --safe-b:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  font-family:'Kanit',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5;
+  overscroll-behavior-y:none;-webkit-text-size-adjust:100%;
+}
+#app{max-width:520px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;background:var(--bg)}
+.top{position:sticky;top:0;z-index:30;background:rgba(246,247,251,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top,0px)) 16px 10px;
+  display:flex;align-items:center;gap:11px}
+.top .av{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--fire1),var(--fire2));
+  display:grid;place-items:center;flex:none}
+.top h1{font-size:14px;font-weight:500;line-height:1.25}
+.top p{font-size:11px;color:var(--ink2);font-weight:300}
+.top .out{margin-left:auto;font-size:11.5px;color:var(--ink2);font-weight:300;border:1px solid var(--line);
+  background:#fff;border-radius:10px;padding:7px 11px;cursor:pointer}
+main{flex:1;padding:16px 16px calc(26px + var(--safe-b))}
+section{display:none;animation:fade .25s ease}
+section.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+h2.ttl{font-size:19px;font-weight:600;line-height:1.35;margin-bottom:6px}
+p.sub{font-size:12.5px;color:var(--ink2);font-weight:300;line-height:1.65}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:13px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;border-radius:15px;
+  background:linear-gradient(135deg,var(--fire1),var(--fire2));color:#fff;font-size:15.5px;font-weight:500;
+  box-shadow:0 10px 22px -12px rgba(229,57,53,.8);border:0;font-family:inherit;cursor:pointer;padding:0 16px}
+.btn:active{transform:scale(.985)}
+.btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn.ok{background:linear-gradient(135deg,#22C55E,#15803D);box-shadow:0 10px 22px -12px rgba(21,128,61,.8)}
+.btn[disabled]{background:#E9ECF3;color:#9AA2B4;box-shadow:none;cursor:not-allowed}
+.row2{display:flex;gap:10px}
+.lbl{font-size:12px;font-weight:400;color:var(--ink2);margin:0 0 6px 2px;display:block}
+.lbl b{color:var(--fire2);font-weight:500}
+input,select{width:100%;height:50px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:0 14px;
+  font-family:inherit;font-size:16px;color:var(--ink);margin-bottom:12px;outline:none;appearance:none}
+input:focus,select:focus{border-color:var(--fire2);box-shadow:0 0 0 3px rgba(229,57,53,.1)}
+.seg{display:flex;gap:10px;margin-bottom:14px}
+.seg button{flex:1;height:48px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-family:inherit;
+  font-size:14px;color:var(--ink2);cursor:pointer}
+.seg button.on{border-color:var(--fire2);color:var(--fire2);background:#FFF4F1;font-weight:500}
+.note{display:flex;gap:9px;background:#F0F4FF;border:1px solid #DCE5FF;border-radius:13px;padding:11px 12px}
+.note p{font-size:11px;color:#3F5280;font-weight:300;line-height:1.6}
+.warn{display:flex;gap:9px;background:#FFF7ED;border:1px solid #FFE0C2;border-radius:13px;padding:11px 12px}
+.warn p{font-size:11px;color:#9A3412;font-weight:300;line-height:1.6}
+.hint{text-align:center;font-size:11px;color:#9AA2B4;font-weight:300;margin-top:10px}
+.bar{height:7px;background:#EDEFF5;border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--fire1),var(--fire2));
+  border-radius:99px;transition:width .4s ease}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12.5px;font-weight:300}
+.kv:last-child{border:0}
+.kv b{font-weight:500}
+
+/* announce */
+.anntop{border-radius:18px;background:linear-gradient(140deg,#2B1B3D,#7A1F1F 60%,#E05A1E);padding:19px 17px;color:#fff;margin-bottom:14px}
+.anntop small{font-size:9.5px;letter-spacing:1.2px;opacity:.85;display:block}
+.anntop h2{font-size:18px;font-weight:600;line-height:1.4;margin-top:8px}
+.anntop p{font-size:11.5px;font-weight:300;opacity:.92;margin-top:8px;line-height:1.65}
+.bldg{display:flex;gap:12px;align-items:center}
+.bldg .fl{display:flex;flex-direction:column;gap:3px;flex:none}
+.bldg .fl u{width:22px;height:4px;background:#DFE3EC;border-radius:1px;display:block}
+.bldg .fl u.hi{background:linear-gradient(90deg,var(--fire1),var(--fire2))}
+.whyl{list-style:none}
+.whyl li{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.whyl li:last-child{border:0;padding-bottom:0}
+.whyl li u{width:25px;height:25px;border-radius:8px;background:#FFF1E8;color:#C2410C;display:grid;place-items:center;
+  font-size:11.5px;font-weight:600;flex:none;text-decoration:none}
+.whyl li p{font-size:12.5px;font-weight:300;line-height:1.65}
+.issuer{font-size:11px;color:var(--ink2);font-weight:300;line-height:1.7;text-align:center;margin:16px 0 4px}
+
+/* consent */
+.cbox{display:flex;gap:11px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px;cursor:pointer}
+.cbox.on{border-color:var(--fire2);background:#FFF4F1}
+.cbox i{width:22px;height:22px;border-radius:7px;border:1.5px solid #CFD5E2;background:#fff;flex:none;
+  display:grid;place-items:center;font-size:13px;font-style:normal;color:#fff}
+.cbox.on i{background:linear-gradient(135deg,var(--fire1),var(--fire2));border-color:transparent}
+.cbox p{font-size:11.5px;font-weight:300;line-height:1.65}
+.pdpa h5{font-size:11.5px;font-weight:500;color:var(--fire2);margin-bottom:9px}
+.pdpa .pk{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed #EDEFF5;font-size:11.5px;font-weight:300;line-height:1.6}
+.pdpa .pk:last-child{border:0}
+.pdpa .pk u{color:var(--ink2);flex:none;width:68px;text-decoration:none}
+
+/* watch */
+.vwrap{position:relative;background:#000;border-radius:16px;overflow:hidden;aspect-ratio:16/9;margin-bottom:13px}
+.vwrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vmask{position:absolute;left:0;right:0;bottom:0;height:62px;background:linear-gradient(transparent,rgba(0,0,0,.35));pointer-events:auto}
+.vcover{position:absolute;inset:0;background:linear-gradient(135deg,#2B1B3D,#7A1F1F 55%,#E05A1E);
+  display:grid;place-items:center;cursor:pointer;z-index:4}
+.vcover .pl{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.95);display:grid;place-items:center;
+  color:var(--fire2);font-size:21px;padding-left:4px}
+.vcover p{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#fff;font-size:11.5px;font-weight:300;opacity:.95}
+.noskip{position:absolute;top:9px;left:9px;z-index:5;display:flex;gap:5px;align-items:center;background:rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,.22);color:#FFD9C7;font-size:10px;padding:4px 9px;border-radius:999px;font-weight:300}
+.pgrow{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.pgrow span{font-size:12px;color:var(--ink2);font-weight:300}
+.pgrow b{font-size:17px;font-weight:600;color:var(--fire2)}
+
+/* quiz */
+.qhead{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.qhead .pb{flex:1}
+.qhead .pb p{font-size:11px;color:var(--ink2);margin-top:6px;font-weight:300}
+.qnum{font-size:11px;font-weight:500;color:var(--fire2);letter-spacing:.5px;margin-bottom:8px}
+.qtxt{font-size:16px;font-weight:500;line-height:1.6;margin-bottom:16px}
+.opt{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--line);border-radius:15px;
+  padding:14px;margin-bottom:10px;font-size:14px;font-weight:300;line-height:1.45;cursor:pointer;text-align:left;
+  width:100%;font-family:inherit;color:var(--ink)}
+.opt u{width:27px;height:27px;border-radius:9px;background:#F2F4F9;color:var(--ink2);display:grid;place-items:center;
+  font-size:12px;font-weight:500;flex:none;text-decoration:none}
+.opt.sel{border-color:var(--fire2);background:#FFF4F1}
+.opt.sel u{background:linear-gradient(135deg,var(--fire1),var(--fire2));color:#fff}
+.opt.right{border-color:#86E0A8;background:var(--okbg)}
+.opt.right u{background:var(--ok);color:#fff}
+.opt.wrong{border-color:#FCA5A5;background:#FEF2F2}
+.opt.wrong u{background:var(--bad);color:#fff}
+
+/* result */
+.ring{width:140px;height:140px;margin:6px auto 16px;border-radius:50%;display:grid;place-items:center;position:relative}
+.ring::after{content:'';position:absolute;inset:12px;background:var(--bg);border-radius:50%}
+.ring div{position:relative;text-align:center}
+.ring b{font-size:36px;font-weight:600;line-height:1}
+.ring span{font-size:11px;color:var(--ink2);font-weight:300;display:block;margin-top:4px}
+.exp{border-radius:13px;padding:11px 12px;margin:-2px 0 14px}
+.exp.g{background:#F0F9F3;border:1px solid #CDEBD8}
+.exp.r{background:#FEF2F2;border:1px solid #FBD5D5}
+.exp b{font-size:11px;font-weight:600;display:block;margin-bottom:4px}
+.exp.g b{color:var(--ok)} .exp.r b{color:var(--bad)}
+.exp p{font-size:11.5px;font-weight:300;line-height:1.7;color:#3A4354}
+
+/* cert */
+#certBox{background:linear-gradient(160deg,#FFFDF8,#FFF4EA);border:1px solid #F0DCC6;border-radius:18px;
+  padding:22px 18px;text-align:center;position:relative;overflow:hidden}
+#certBox::before{content:'';position:absolute;inset:8px;border:1px solid #EBD3B6;border-radius:13px;pointer-events:none}
+#certBox .seal{width:52px;height:52px;margin:0 auto 12px;border-radius:50%;
+  background:linear-gradient(145deg,var(--amber),var(--fire2));display:grid;place-items:center}
+#certBox small{font-size:9.5px;letter-spacing:1.6px;color:#A07A4E;font-weight:500;display:block}
+#certBox h3{font-size:15px;font-weight:600;margin:10px 0 2px;color:#7A3A12}
+#certBox .nm{font-size:19px;font-weight:600;margin:12px 0 3px}
+#certBox .cs{font-size:11.5px;color:var(--ink2);font-weight:300;line-height:1.7}
+#certBox .ln{height:1px;background:#EBD3B6;margin:14px 22px}
+#certBox .qr{width:78px;height:78px;margin:0 auto;background:#fff;padding:4px;border-radius:8px;box-shadow:0 0 0 1px #E3D3BE}
+#certBox .qr canvas,#certBox .qr img{width:100%!important;height:100%!important;display:block}
+#certBox .vid{font-size:9px;color:#9A8468;font-weight:300;margin-top:8px;letter-spacing:.3px}
+
+/* misc */
+#toast{position:fixed;left:50%;bottom:calc(22px + var(--safe-b));transform:translate(-50%,24px);z-index:90;
+  background:#131A2A;color:#fff;font-size:12.5px;font-weight:300;padding:12px 18px;border-radius:14px;
+  max-width:88vw;text-align:center;opacity:0;pointer-events:none;transition:.25s;box-shadow:0 14px 30px -12px rgba(0,0,0,.5)}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--fire2);border-radius:50%;
+  margin:40px auto;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.badge{display:inline-block;font-size:10.5px;font-weight:500;padding:4px 10px;border-radius:999px}
+.badge.p{background:var(--okbg);color:var(--ok)}
+.badge.w{background:#FFF1E8;color:#C2410C}
+@media(min-width:560px){ main{padding:22px 22px calc(34px + var(--safe-b))} }
+</style>
+</head>
+<body>
+
+<div id="app">
+  <header class="top">
+    <div class="av"><svg width="19" height="19" viewBox="0 0 24 24" fill="#fff"><path d="M12 2s4.5 4.2 4.5 8.3c0 1.4-.6 2.6-1.6 3.4.3-1.6-.3-3.3-1.6-4.4.2 2.4-1 3.6-2.3 4.8-1.2 1.1-2 2.3-2 3.9 0 .4.1.8.2 1.1-1.7-1-2.9-3-2.9-5.3C6.3 8.6 12 2 12 2z"/></svg></div>
+    <div style="min-width:0">
+      <h1 id="hTitle">ความปลอดภัยจากอัคคีภัย</h1>
+      <p id="hSub">หอพักนักศึกษาพยาบาลรามาธิบดี</p>
+    </div>
+    <button class="out" id="btnOut" style="display:none" type="button">ออกจากระบบ</button>
+  </header>
+
+  <main>
+    <!-- โหลด -->
+    <section id="s-load" class="on"><div class="spin"></div><p class="hint">กำลังเชื่อมต่อระบบ…</p></section>
+
+    <!-- 1 ประกาศ -->
+    <section id="s-announce">
+      <div class="anntop">
+        <small>ประกาศหอพักนักศึกษาพยาบาลรามาธิบดี</small>
+        <h2>ความปลอดภัยจากอัคคีภัย<br>ในอาคารหอพักสูง 9 ชั้น</h2>
+        <p>การอบรมภาคบังคับสำหรับนักศึกษาพยาบาลชั้นปีที่ 3 และ 4 ผู้พักอาศัยในหอพัก</p>
+      </div>
+
+      <div class="card">
+        <div class="bldg">
+          <div class="fl"><u class="hi"></u><u class="hi"></u><u></u><u></u><u></u><u></u><u></u><u></u><u></u></div>
+          <div>
+            <b style="font-size:13px;font-weight:500">อาคารสูง 9 ชั้น · ผู้พักอาศัยหนาแน่น</b>
+            <p style="font-size:11.5px;color:var(--ink2);font-weight:300;line-height:1.6;margin-top:3px">
+              เมื่อเกิดเพลิงไหม้ ควันไฟลอยขึ้นสู่ชั้นบนได้ภายในไม่กี่นาที การอพยพจากอาคารสูงต้องรู้เส้นทางและขั้นตอนไว้ล่วงหน้า ไม่สามารถเรียนรู้ระหว่างเกิดเหตุได้</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="lbl" style="margin-bottom:4px">เหตุผลที่นักศึกษาทุกคนต้องรับชม</p>
+        <ul class="whyl">
+          <li><u>1</u><p>ทราบเส้นทางหนีไฟ บันไดหนีไฟ จุดรวมพล และตำแหน่งอุปกรณ์ดับเพลิงของหอพักแต่ละชั้น</p></li>
+          <li><u>2</u><p>ปฏิบัติตามหลัก RACE ได้ถูกลำดับ และใช้ถังดับเพลิงเบื้องต้นได้อย่างปลอดภัย</p></li>
+          <li><u>3</u><p>ป้องกันพฤติกรรมเสี่ยงในห้องพัก เช่น ต่อปลั๊กพ่วงเกินกำลัง และการกีดขวางทางหนีไฟ</p></li>
+          <li><u>4</u><p>ในฐานะวิชาชีพพยาบาล ต้องสามารถช่วยเหลือและนำผู้อื่นอพยพได้เมื่อเกิดเหตุจริง</p></li>
+        </ul>
+      </div>
+
+      <div class="warn" style="margin-bottom:13px">
+        <span>⚠️</span>
+        <p><b style="font-weight:600">ข้อกำหนดภาคบังคับ</b> — นักศึกษาต้องรับชมสื่อให้ครบถ้วน (ระบบไม่อนุญาตให้เลื่อนข้าม) และทำแบบประเมิน 5 ข้อให้ได้ <b style="font-weight:600">5/5 คะแนน</b> ภายในวันที่ <span id="dlText">30 พฤศจิกายน 2569</span> ระบบจะบันทึกการลงชื่อรับรองเป็นหลักฐานการอบรมด้านความปลอดภัย และออกใบประกาศให้อัตโนมัติ ผู้ที่ยังไม่ดำเนินการจะได้รับการติดตามจากหน่วยกายภาพ</p>
+      </div>
+
+      <p class="issuer">
+        ประกาศโดย หน่วยกายภาพ · งานสนับสนุนการศึกษาและสถาบันการแพทย์จักรีนฤบดินทร์<br>
+        โรงเรียนพยาบาลรามาธิบดี คณะแพทยศาสตร์โรงพยาบาลรามาธิบดี มหาวิทยาลัยมหิดล
+      </p>
+      <button class="btn" id="btnAck" type="button">รับทราบ · เริ่มลงชื่อ →</button>
+    </section>
+
+    <!-- 2 ลงชื่อ -->
+    <section id="s-login">
+      <h2 class="ttl">ลงชื่อรับรองการรับชมสื่อ</h2>
+      <p class="sub" style="margin-bottom:16px">กรอกข้อมูลให้ตรงกับทะเบียนนักศึกษา ชื่อที่กรอกจะปรากฏบนใบประกาศ</p>
+
+      <div id="gsiWrap" style="display:none;margin-bottom:14px">
+        <div id="gsiBtn"></div>
+        <p class="hint" style="margin:10px 0 0">— หรือกรอกข้อมูลยืนยัน —</p>
+      </div>
+
+      <div class="card">
+        <label class="lbl" for="fId">รหัสนักศึกษา <b>*</b></label>
+        <input id="fId" type="tel" inputmode="numeric" autocomplete="off" maxlength="10" placeholder="เช่น 6412345">
+        <label class="lbl" for="fFn">ชื่อ (ไม่ต้องใส่คำนำหน้า) <b>*</b></label>
+        <input id="fFn" type="text" autocomplete="off" maxlength="60" placeholder="เช่น กชกร">
+        <label class="lbl" for="fLn">นามสกุล <b>*</b></label>
+        <input id="fLn" type="text" autocomplete="off" maxlength="60" placeholder="เช่น ใจดี">
+        <label class="lbl">ชั้นปี <b>*</b></label>
+        <div class="seg" id="segYear">
+          <button type="button" data-y="3">ชั้นปี 3</button>
+          <button type="button" data-y="4">ชั้นปี 4</button>
+        </div>
+        <div class="note"><span>🔒</span><p>ระบบตรวจสอบข้อมูลกับทะเบียนนักศึกษา 1 คน = 1 สิทธิ์ ไม่สามารถลงชื่อแทนกันได้ และบันทึกเวลาการรับชมไว้ที่เซิร์ฟเวอร์</p></div>
+      </div>
+      <button class="btn" id="btnNext1" type="button">ถัดไป →</button>
+    </section>
+
+    <!-- 3 PDPA -->
+    <section id="s-consent">
+      <h2 class="ttl">ความยินยอมข้อมูลส่วนบุคคล</h2>
+      <p class="sub" style="margin-bottom:14px">ตาม พ.ร.บ.คุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA)</p>
+
+      <div class="card pdpa">
+        <h5>ข้อมูลที่จัดเก็บ</h5>
+        <div class="pk"><u>ระบุตัวตน</u><span>รหัสนักศึกษา, ชื่อ–นามสกุล, ชั้นปี (และอีเมลมหาวิทยาลัยหากลงชื่อด้วย Google)</span></div>
+        <div class="pk"><u>การรับชม</u><span>เวลาเริ่ม–สิ้นสุด, สัดส่วนที่รับชม, จำนวนครั้งที่เข้าดู</span></div>
+        <div class="pk"><u>แบบประเมิน</u><span>คำตอบ คะแนน และวัน–เวลาที่ส่ง</span></div>
+        <div class="pk"><u>ระบบ</u><span>วัน–เวลาเข้าใช้งาน เพื่อตรวจสอบการลงชื่อซ้ำ (ไม่เก็บหมายเลข IP และไม่ติดตามพฤติกรรมอื่น)</span></div>
+      </div>
+
+      <div class="card pdpa">
+        <h5>วัตถุประสงค์ · ระยะเวลา · สิทธิ์ของท่าน</h5>
+        <div class="pk"><u>ใช้เพื่อ</u><span>บันทึกหลักฐานการอบรมความปลอดภัยจากอัคคีภัยของผู้พักอาศัยหอพัก ออกใบประกาศ และรายงานสรุปต่อหน่วยกายภาพ</span></div>
+        <div class="pk"><u>เก็บไว้</u><span>2 ปีการศึกษา หลังจากนั้นจะลบหรือทำให้ไม่สามารถระบุตัวบุคคลได้</span></div>
+        <div class="pk"><u>ผู้ควบคุม</u><span>หน่วยกายภาพ งานสนับสนุนการศึกษาและสถาบันการแพทย์จักรีนฤบดินทร์ โรงเรียนพยาบาลรามาธิบดี</span></div>
+        <div class="pk"><u>สิทธิ์</u><span>ขอเข้าถึง แก้ไข หรือถอนความยินยอมได้ โดยการถอนความยินยอมจะทำให้ไม่สามารถออกใบประกาศได้</span></div>
+        <div class="pk"><u>ติดต่อ</u><span id="contactTxt">หน่วยกายภาพ</span></div>
+      </div>
+
+      <div class="cbox" id="cb1"><i>✓</i><p><b style="font-weight:500">ข้าพเจ้ายินยอม</b> ให้เก็บรวบรวมและใช้ข้อมูลตามรายละเอียดข้างต้น เพื่อบันทึกการอบรมและออกใบประกาศ <b style="font-weight:500;color:var(--fire2)">(จำเป็น)</b></p></div>
+      <div class="cbox" id="cb2"><i>✓</i><p>ยินยอมให้เผยแพร่ชื่อ–นามสกุลในประกาศรายชื่อผู้ผ่านการอบรมของหอพัก <b style="font-weight:500;color:var(--ink2)">(ไม่บังคับ)</b></p></div>
+
+      <div class="row2" style="margin-top:14px">
+        <button class="btn ghost" id="btnBack2" type="button" style="flex:.8">ย้อนกลับ</button>
+        <button class="btn" id="btnConsent" type="button" style="flex:1.5">ยินยอมและเข้าใช้งาน</button>
+      </div>
+    </section>
+
+    <!-- 4 รับชม -->
+    <section id="s-watch">
+      <div class="vwrap" id="vwrap">
+        <div id="player"></div>
+        <div class="noskip">⛔ ปิดการเลื่อน/เร่งความเร็ว</div>
+        <div class="vmask"></div>
+        <div class="vcover" id="vcover">
+          <div class="pl">▶</div>
+          <p>แตะเพื่อเริ่มรับชม</p>
+        </div>
+      </div>
+
+      <h2 class="ttl" style="font-size:16px" id="vTitle">FIRE! รู้ทันไฟ รอดได้ด้วยการเตรียมพร้อม</h2>
+
+      <div class="card" style="margin-top:13px">
+        <div class="pgrow"><span>ความคืบหน้าที่ระบบรับรอง</span><b id="pctTxt">0%</b></div>
+        <div class="bar"><i id="pctBar"></i></div>
+        <div class="kv" style="margin-top:12px"><span>เวลาที่รับชมสะสม</span><b id="timeTxt">00:00 / 00:00</b></div>
+        <div class="kv"><span>เกณฑ์ผ่านการรับชม</span><b id="needTxt">95%</b></div>
+      </div>
+
+      <div class="warn" style="margin-bottom:13px">
+        <span>⚠️</span>
+        <p>ระบบนับเวลาจากฝั่งเซิร์ฟเวอร์ หากสลับแอป ปิดหน้าจอ หรือพยายามเลื่อนข้าม เวลาจะหยุดนับและต้องรับชมต่อจากจุดเดิม</p>
+      </div>
+
+      <button class="btn" id="btnQuiz" type="button" disabled>🔒 ทำแบบประเมิน (รับชมให้ครบก่อน)</button>
+      <p class="hint" id="watchHint">เหลืออีก —</p>
+    </section>
+
+    <!-- 5 แบบประเมิน -->
+    <section id="s-quiz">
+      <div class="qhead">
+        <div class="pb">
+          <div class="bar"><i id="qBar"></i></div>
+          <p id="qMeta">ข้อ 1 จาก 5</p>
+        </div>
+      </div>
+      <div class="qnum" id="qNo">คำถามข้อที่ 1</div>
+      <div class="qtxt" id="qText"></div>
+      <div id="qOpts"></div>
+      <div class="row2" style="margin-top:14px">
+        <button class="btn ghost" id="btnPrev" type="button" style="flex:.8">ย้อนกลับ</button>
+        <button class="btn" id="btnNextQ" type="button" style="flex:1.5">ข้อต่อไป →</button>
+      </div>
+      <p class="hint">ต้องตอบครบทุกข้อจึงจะส่งคำตอบได้ · ต้องได้ 5/5 จึงผ่าน</p>
+    </section>
+
+    <!-- 6 ผลคะแนน -->
+    <section id="s-result">
+      <div style="text-align:center">
+        <div class="ring" id="ring"><div><b id="scoreTxt">0/5</b><span id="scoreCap">คะแนน</span></div></div>
+        <h2 class="ttl" id="resTtl">—</h2>
+        <p class="sub" id="resSub" style="margin-bottom:16px">—</p>
+      </div>
+      <div class="card" id="resMeta"></div>
+      <p class="lbl" style="margin:16px 0 8px 2px">เฉลยและคำอธิบาย</p>
+      <div id="resList"></div>
+      <div id="resActions" style="margin-top:6px"></div>
+    </section>
+
+    <!-- 7 ใบประกาศ -->
+    <section id="s-cert">
+      <h2 class="ttl">ใบประกาศเกียรติคุณ</h2>
+      <p class="sub" style="margin-bottom:14px">บันทึกภาพหน้าจอ หรือดาวน์โหลดเก็บไว้เป็นหลักฐานได้</p>
+      <div id="certBox">
+        <div class="seal"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M12 2s4.5 4.2 4.5 8.3c0 1.4-.6 2.6-1.6 3.4.3-1.6-.3-3.3-1.6-4.4.2 2.4-1 3.6-2.3 4.8-1.2 1.1-2 2.3-2 3.9 0 .4.1.8.2 1.1-1.7-1-2.9-3-2.9-5.3C6.3 8.6 12 2 12 2z"/></svg></div>
+        <small>CERTIFICATE OF COMPLETION</small>
+        <h3>ขอมอบเกียรติบัตรนี้ให้แก่</h3>
+        <div class="nm" id="cName">—</div>
+        <p class="cs" id="cMeta">—</p>
+        <div class="ln"></div>
+        <p class="cs">ผ่านการรับชมสื่อ <b style="font-weight:500" id="cVideo">—</b><br>ครบถ้วน และผ่านแบบประเมิน <span id="cScore">5/5</span> คะแนน</p>
+        <p class="cs" id="cDate" style="margin-top:8px">—</p>
+        <div class="ln"></div>
+        <p class="cs" style="font-size:10.5px">หน่วยกายภาพ · งานสนับสนุนการศึกษาและสถาบันการแพทย์จักรีนฤบดินทร์<br>โรงเรียนพยาบาลรามาธิบดี คณะแพทยศาสตร์โรงพยาบาลรามาธิบดี มหาวิทยาลัยมหิดล</p>
+        <div class="qr" id="cQr" style="margin-top:13px"></div>
+        <p class="vid" id="cNo">—</p>
+      </div>
+      <div class="row2" style="margin-top:14px">
+        <button class="btn" id="btnPng" type="button">⬇ PNG</button>
+        <button class="btn ghost" id="btnPdf" type="button">⬇ PDF</button>
+      </div>
+      <p class="hint">ใบประกาศตรวจสอบย้อนหลังได้ด้วย QR หรือเลขที่ใบประกาศ</p>
+      <button class="btn ghost" id="btnHome" type="button" style="margin-top:14px">กลับหน้ารับชม</button>
+    </section>
+
+    <!-- 8 ตรวจสอบใบประกาศ -->
+    <section id="s-verify">
+      <h2 class="ttl">ตรวจสอบใบประกาศ</h2>
+      <p class="sub" style="margin-bottom:14px">ตรวจสอบความถูกต้องของใบประกาศจากเลขที่</p>
+      <div class="card">
+        <label class="lbl" for="vNo">เลขที่ใบประกาศ</label>
+        <input id="vNo" type="text" maxlength="40" placeholder="RSON-FIRE-69-0001">
+        <button class="btn" id="btnVerify" type="button">ตรวจสอบ</button>
+      </div>
+      <div id="vResult"></div>
+    </section>
+  </main>
+</div>
+
+<div id="toast"></div>
+
+<script src="lib/qrcode.js"></script>
+<script src="lib/html2canvas.min.js"></script>
+<script src="lib/jspdf.umd.min.js"></script>
+
+<script>
+/* =======================================================================
+   ตั้งค่า: วาง URL ของ Apps Script Web App (ลงท้าย /exec) ที่บรรทัดล่างนี้
+   ======================================================================= */
+var API = 'https://script.google.com/macros/s/AKfycbwgBDtMQH9k0R4UjdokDJgtf6x5kJxZgLc1ucMrVsriYP4nWR5JArCBIxSlYfGYfuCu/exec';
+
+/* ----------------------------- utilities ----------------------------- */
+var $  = function (id) { return document.getElementById(id); };
+var ST = { token: '', cfg: null, me: null, state: null, pend: null, qs: [], ans: [], qi: 0, last: null };
+var KEY = 'rson_fire_token';
+
+function show(id) {
+  var list = document.querySelectorAll('main > section');
+  for (var i = 0; i < list.length; i++) list[i].className = '';
+  $(id).className = 'on';
+  window.scrollTo(0, 0);
+}
+function toast(msg, ms) {
+  var t = $('toast'); t.textContent = msg; t.className = 'on';
+  clearTimeout(toast._t); toast._t = setTimeout(function () { t.className = ''; }, ms || 3200);
+}
+function mmss(s) {
+  s = Math.max(0, Math.round(s || 0));
+  var m = Math.floor(s / 60), x = s % 60;
+  return (m < 10 ? '0' : '') + m + ':' + (x < 10 ? '0' : '') + x;
+}
+function thaiDate(iso) {
+  var d = iso ? new Date(iso) : new Date();
+  var M = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+  return 'ให้ไว้ ณ วันที่ ' + d.getDate() + ' ' + M[d.getMonth()] + ' พ.ศ. ' + (d.getFullYear() + 543);
+}
+/* ส่งแบบ text/plain → ไม่เกิด CORS preflight กับ Apps Script */
+function api(action, data) {
+  var body = data || {}; body.action = action;
+  if (ST.token && !body.token) body.token = ST.token;
+  return fetch(API, { method: 'POST', body: JSON.stringify(body), redirect: 'follow' })
+    .then(function (r) { return r.json(); })
+    .then(function (res) {
+      if (res && res.ok === false && (res.error === 'UNAUTHORIZED' || res.error === 'EXPIRED')) {
+        signOut(true); toast(res.message || 'กรุณาลงชื่อเข้าใช้ใหม่');
+      }
+      return res || { ok: false, error: 'EMPTY' };
+    })
+    .catch(function () { return { ok: false, error: 'NETWORK', message: 'เชื่อมต่อไม่ได้ กรุณาตรวจสอบอินเทอร์เน็ต' }; });
+}
+
+/* ------------------------------- boot -------------------------------- */
+function boot() {
+  if (API.indexOf('XXXX') > -1) {
+    show('s-load');
+    $('s-load').innerHTML = '';
+    var w = document.createElement('div'); w.className = 'warn';
+    var p = document.createElement('p');
+    p.textContent = 'ยังไม่ได้ตั้งค่า API — กรุณาวาง URL ของ Apps Script Web App ในตัวแปร API ที่ไฟล์ index.html';
+    w.appendChild(p); $('s-load').appendChild(w);
+    return;
+  }
+  api('config', {}).then(function (c) {
+    if (!c.ok) { toast(c.message || 'เชื่อมต่อระบบไม่ได้'); return; }
+    ST.cfg = c;
+    $('vTitle').textContent = c.videoTitle;
+    $('needTxt').textContent = Math.round(c.watchRequired * 100) + '%';
+    $('contactTxt').textContent = c.contact || '';
+    if (c.deadline) {
+      var d = new Date(c.deadline + 'T00:00:00');
+      var M = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+      $('dlText').textContent = d.getDate() + ' ' + M[d.getMonth()] + ' ' + (d.getFullYear() + 543);
+    }
+
+    var q = new URLSearchParams(location.search);
+    if (q.get('v')) { $('vNo').value = q.get('v'); show('s-verify'); doVerify(); return; }
+
+    if (c.googleClientId) initGsi(c.googleClientId);
+
+    ST.token = localStorage.getItem(KEY) || '';
+    if (!ST.token) { show('s-announce'); return; }
+    api('state', {}).then(function (r) {
+      if (!r.ok) { show('s-announce'); return; }
+      ST.me = r.student; ST.state = r.state;
+      afterLogin();
+    });
+  });
+}
+
+function afterLogin() {
+  $('btnOut').style.display = '';
+  $('hTitle').textContent = ST.me.firstName + ' ' + ST.me.lastName;
+  $('hSub').textContent = ST.me.studentId + ' · พยาบาลศาสตร์ ชั้นปี ' + ST.me.year;
+  if (ST.state && ST.state.passed) { openCert(); return; }
+  openWatch();
+}
+
+function signOut(silent) {
+  ST.token = ''; ST.me = null; ST.state = null;
+  try { localStorage.removeItem(KEY); } catch (e) {}
+  stopTick();
+  $('btnOut').style.display = 'none';
+  $('hTitle').textContent = 'ความปลอดภัยจากอัคคีภัย';
+  $('hSub').textContent = 'หอพักนักศึกษาพยาบาลรามาธิบดี';
+  show('s-announce');
+  if (!silent) toast('ออกจากระบบแล้ว');
+}
+
+/* ---------------------------- login + PDPA --------------------------- */
+var pickedYear = '';
+document.querySelectorAll('#segYear button').forEach(function (b) {
+  b.addEventListener('click', function () {
+    pickedYear = b.getAttribute('data-y');
+    document.querySelectorAll('#segYear button').forEach(function (x) { x.className = ''; });
+    b.className = 'on';
+  });
+});
+$('btnAck').addEventListener('click', function () { show('s-login'); });
+$('btnBack2').addEventListener('click', function () { show('s-login'); });
+
+$('btnNext1').addEventListener('click', function () {
+  var id = $('fId').value.replace(/\D/g, '');
+  var fn = $('fFn').value.trim(), ln = $('fLn').value.trim();
+  if (!/^[0-9]{7,10}$/.test(id)) return toast('กรอกรหัสนักศึกษาเป็นตัวเลข 7–10 หลัก');
+  if (fn.length < 2 || ln.length < 2) return toast('กรอกชื่อและนามสกุลให้ครบ');
+  if (!pickedYear) return toast('เลือกชั้นปี');
+  ST.pend = { studentId: id, firstName: fn, lastName: ln, year: pickedYear };
+  show('s-consent');
+});
+
+var ok1 = false, ok2 = false;
+$('cb1').addEventListener('click', function () { ok1 = !ok1; this.className = ok1 ? 'cbox on' : 'cbox'; });
+$('cb2').addEventListener('click', function () { ok2 = !ok2; this.className = ok2 ? 'cbox on' : 'cbox'; });
+
+$('btnConsent').addEventListener('click', function () {
+  if (!ok1) return toast('ต้องให้ความยินยอมข้อที่จำเป็นก่อนเข้าใช้งาน');
+  if (!ST.pend) return show('s-login');
+  var b = this; b.disabled = true; b.textContent = 'กำลังบันทึก…';
+  var payload = JSON.parse(JSON.stringify(ST.pend));
+  payload.acceptRequired = true;
+  payload.acceptPublish = ok2;
+  payload.agent = navigator.userAgent;
+  api('signin', payload).then(function (r) {
+    b.disabled = false; b.textContent = 'ยินยอมและเข้าใช้งาน';
+    if (!r.ok) return toast(r.message || 'ลงชื่อไม่สำเร็จ');
+    ST.token = r.token; ST.me = r.student; ST.state = r.state;
+    try { localStorage.setItem(KEY, r.token); } catch (e) {}
+    afterLogin();
+  });
+});
+$('btnOut').addEventListener('click', function () { signOut(); });
+
+/* ----------------------- Google Sign-In (ทางเลือก) ------------------- */
+function initGsi(clientId) {
+  var s = document.createElement('script');
+  s.src = 'https://accounts.google.com/gsi/client'; s.async = true; s.defer = true;
+  s.onload = function () {
+    try {
+      google.accounts.id.initialize({ client_id: clientId, callback: onGsi });
+      google.accounts.id.renderButton($('gsiBtn'), { theme: 'outline', size: 'large', width: 300, text: 'signin_with' });
+      $('gsiWrap').style.display = '';
+    } catch (e) {}
+  };
+  document.head.appendChild(s);
+}
+function onGsi(resp) {
+  var id = $('fId').value.replace(/\D/g, '');
+  var fn = $('fFn').value.trim(), ln = $('fLn').value.trim();
+  if (!/^[0-9]{7,10}$/.test(id) || !fn || !ln || !pickedYear)
+    return toast('กรอกรหัสนักศึกษา ชื่อ–นามสกุล และชั้นปี ก่อนลงชื่อด้วย Google');
+  if (!ok1) { ST.pend = { studentId: id, firstName: fn, lastName: ln, year: pickedYear }; show('s-consent'); return toast('กรุณาให้ความยินยอม PDPA ก่อน'); }
+  api('googleSignin', {
+    credential: resp.credential, studentId: id, firstName: fn, lastName: ln,
+    year: pickedYear, acceptRequired: true, acceptPublish: ok2, agent: navigator.userAgent
+  }).then(function (r) {
+    if (!r.ok) return toast(r.message || 'ยืนยันบัญชีไม่สำเร็จ');
+    ST.token = r.token; ST.me = r.student; ST.state = r.state;
+    try { localStorage.setItem(KEY, r.token); } catch (e) {}
+    afterLogin();
+  });
+}
+
+/* ------------------------------ รับชมสื่อ ----------------------------- */
+var YT_READY = false, player = null, tickTimer = null, uiTimer = null, duration = 0, started = false;
+
+function loadYT() {
+  if (window.YT && window.YT.Player) { YT_READY = true; return Promise.resolve(); }
+  return new Promise(function (res) {
+    window.onYouTubeIframeAPIReady = function () { YT_READY = true; res(); };
+    var s = document.createElement('script');
+    s.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(s);
+  });
+}
+
+function openWatch() {
+  show('s-watch');
+  paintWatch();
+  loadYT().then(function () {
+    if (player) return;
+    player = new YT.Player('player', {
+      videoId: ST.cfg.videoId,
+      playerVars: {
+        controls: 0, disablekb: 1, modestbranding: 1, rel: 0, fs: 0,
+        playsinline: 1, iv_load_policy: 3, origin: location.origin
+      },
+      events: {
+        onReady: onPlayerReady,
+        onStateChange: onPlayerState,
+        onPlaybackRateChange: function () { try { player.setPlaybackRate(1); } catch (e) {} }
+      }
+    });
+  });
+}
+
+function onPlayerReady() {
+  duration = Math.round(player.getDuration() || 0);
+  if (!duration) { setTimeout(onPlayerReady, 800); return; }
+  $('timeTxt').textContent = mmss(ST.state ? ST.state.watchedSec : 0) + ' / ' + mmss(duration);
+  api('watchStart', { duration: duration }).then(function (r) {
+    if (r.ok) { ST.state = r.state; paintWatch(); }
+  });
+}
+
+$('vcover').addEventListener('click', function () {
+  if (!player || !duration) return toast('กำลังเตรียมวิดีโอ…');
+  this.style.display = 'none';
+  var resume = ST.state ? Math.max(0, Math.min(ST.state.maxPositionSec || 0, duration - 1)) : 0;
+  try { player.seekTo(resume, true); player.setPlaybackRate(1); player.playVideo(); } catch (e) {}
+  started = true;
+  startTick();
+});
+
+function onPlayerState(e) {
+  if (e.data === YT.PlayerState.PLAYING) { startTick(); }
+  if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.BUFFERING) { /* เซิร์ฟเวอร์จะหยุดนับเอง */ }
+  if (e.data === YT.PlayerState.ENDED) { stopTick(); sendTick(true); }
+}
+
+function startTick() {
+  if (!tickTimer) tickTimer = setInterval(function () { sendTick(false); }, (ST.cfg.tickSec || 10) * 1000);
+  if (!uiTimer) uiTimer = setInterval(paintLocal, 1000);
+}
+function stopTick() {
+  clearInterval(tickTimer); tickTimer = null;
+  clearInterval(uiTimer); uiTimer = null;
+}
+function paintLocal() {
+  if (!player || !duration) return;
+  try { $('timeTxt').textContent = mmss(ST.state ? ST.state.watchedSec : 0) + ' / ' + mmss(duration); } catch (e) {}
+}
+
+function sendTick(force) {
+  if (!player || !duration) return;
+  var playing = false;
+  try { playing = player.getPlayerState() === YT.PlayerState.PLAYING; } catch (e) {}
+  if (!playing && !force) return;
+  var pos = 0;
+  try { pos = player.getCurrentTime() || 0; } catch (e) {}
+  api('watchTick', { position: pos, duration: duration }).then(function (r) {
+    if (!r.ok) return;
+    ST.state = r.state;
+    if (r.seekBlocked) {
+      try { player.seekTo(r.rewindTo || 0, true); } catch (e) {}
+      toast('ไม่สามารถเลื่อนข้ามได้ ระบบพากลับไปจุดที่รับชมค้างไว้');
+    }
+    paintWatch();
+  });
+}
+
+function paintWatch() {
+  var st = ST.state || { percent: 0, watchedSec: 0, eligible: false };
+  var pct = Math.min(100, Math.round((st.percent || 0) * 100));
+  $('pctTxt').textContent = pct + '%';
+  $('pctBar').style.width = pct + '%';
+  if (duration) $('timeTxt').textContent = mmss(st.watchedSec) + ' / ' + mmss(duration);
+
+  var need = Math.ceil((ST.cfg.watchRequired * (duration || st.durationSec || 0)) - (st.watchedSec || 0));
+  var b = $('btnQuiz');
+  if (st.eligible) {
+    b.disabled = false;
+    b.textContent = '📝 ทำแบบประเมิน 5 ข้อ';
+    $('watchHint').textContent = 'รับชมครบตามเกณฑ์แล้ว · ทำแบบประเมินได้ ' + (st.attemptsLeft != null ? st.attemptsLeft : '') + ' ครั้ง';
+    stopTick();
+  } else {
+    b.disabled = true;
+    b.textContent = '🔒 ทำแบบประเมิน (รับชมให้ครบก่อน)';
+    $('watchHint').textContent = need > 0 ? 'เหลืออีกประมาณ ' + mmss(need) : 'กำลังตรวจสอบ…';
+  }
+}
+
+/* หยุดนับเมื่อออกจากหน้าจอ/สลับแอป */
+document.addEventListener('visibilitychange', function () {
+  if (document.hidden && player && started) { try { player.pauseVideo(); } catch (e) {} stopTick(); }
+});
+window.addEventListener('blur', function () {
+  if (player && started) { try { player.pauseVideo(); } catch (e) {} }
+});
+
+/* ------------------------------ แบบประเมิน --------------------------- */
+$('btnQuiz').addEventListener('click', function () {
+  api('questions', {}).then(function (r) {
+    if (!r.ok) return toast(r.message || 'ยังไม่สามารถทำแบบประเมินได้');
+    ST.qs = r.questions; ST.ans = new Array(r.questions.length); ST.qi = 0;
+    show('s-quiz'); paintQuiz();
+  });
+});
+$('btnPrev').addEventListener('click', function () { if (ST.qi > 0) { ST.qi--; paintQuiz(); } });
+$('btnNextQ').addEventListener('click', function () {
+  if (ST.ans[ST.qi] == null) return toast('กรุณาเลือกคำตอบ');
+  if (ST.qi < ST.qs.length - 1) { ST.qi++; paintQuiz(); return; }
+  for (var i = 0; i < ST.qs.length; i++) if (ST.ans[i] == null) { ST.qi = i; paintQuiz(); return toast('ยังตอบไม่ครบข้อ ' + (i + 1)); }
+  var b = this; b.disabled = true; b.textContent = 'กำลังส่ง…';
+  api('submitQuiz', { answers: ST.ans }).then(function (r) {
+    b.disabled = false; b.textContent = 'ส่งคำตอบ';
+    if (!r.ok) return toast(r.message || 'ส่งคำตอบไม่สำเร็จ');
+    ST.last = r; ST.state = r.state;
+    paintResult(r);
+  });
+});
+
+function paintQuiz() {
+  var q = ST.qs[ST.qi], n = ST.qs.length;
+  $('qBar').style.width = Math.round(((ST.qi + 1) / n) * 100) + '%';
+  var answered = ST.ans.filter(function (x) { return x != null; }).length;
+  $('qMeta').textContent = 'ข้อ ' + (ST.qi + 1) + ' จาก ' + n + ' · ตอบแล้ว ' + answered;
+  $('qNo').textContent = 'คำถามข้อที่ ' + (ST.qi + 1);
+  $('qText').textContent = q.question;
+
+  var wrap = $('qOpts'); wrap.textContent = '';
+  var letters = ['ก','ข','ค','ง'], keys = ['a','b','c','d'];
+  q.options.forEach(function (text, i) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'opt' + (ST.ans[ST.qi] === keys[i] ? ' sel' : '');
+    var u = document.createElement('u'); u.textContent = letters[i];
+    var sp = document.createElement('span'); sp.textContent = text;
+    btn.appendChild(u); btn.appendChild(sp);
+    btn.addEventListener('click', function () { ST.ans[ST.qi] = keys[i]; paintQuiz(); });
+    wrap.appendChild(btn);
+  });
+  $('btnNextQ').textContent = ST.qi < n - 1 ? 'ข้อต่อไป →' : 'ส่งคำตอบ';
+  $('btnPrev').disabled = ST.qi === 0;
+}
+
+/* ------------------------------- ผลคะแนน ----------------------------- */
+function paintResult(r) {
+  show('s-result');
+  var pass = r.passed, pc = Math.round((r.score / r.total) * 100);
+  $('ring').style.background = 'conic-gradient(' + (pass ? '#16A34A' : '#E53935') + ' 0 ' + pc + '%, #E9ECF3 ' + pc + '% 100%)';
+  $('scoreTxt').textContent = r.score + '/' + r.total;
+  $('scoreTxt').style.color = pass ? 'var(--ok)' : 'var(--bad)';
+  $('scoreCap').textContent = pass ? 'คะแนนเต็ม' : 'คะแนน';
+  $('resTtl').textContent = pass ? 'ผ่านเกณฑ์ 🎉' : 'ยังไม่ผ่านเกณฑ์';
+  $('resSub').textContent = pass
+    ? 'ระบบบันทึกการลงชื่อรับรองการรับชมสื่อเรียบร้อยแล้ว'
+    : 'ต้องได้ ' + ST.cfg.passScore + '/' + r.total + ' คะแนนจึงจะผ่าน ศึกษาเฉลยด้านล่างแล้วทำแบบประเมินอีกครั้งได้';
+
+  var m = $('resMeta'); m.textContent = '';
+  [['สัดส่วนการรับชม', Math.round((ST.state.percent || 0) * 100) + '%'],
+   ['จำนวนครั้งที่ทำวันนี้', (ST.state.attemptsToday || 0) + ' ครั้ง (เหลือ ' + (ST.state.attemptsLeft || 0) + ')'],
+   ['ส่งคำตอบเมื่อ', new Date().toLocaleString('th-TH')]].forEach(function (kv) {
+    var d = document.createElement('div'); d.className = 'kv';
+    var s1 = document.createElement('span'); s1.textContent = kv[0];
+    var s2 = document.createElement('b'); s2.textContent = kv[1];
+    d.appendChild(s1); d.appendChild(s2); m.appendChild(d);
+  });
+
+  var list = $('resList'); list.textContent = '';
+  var letters = ['ก','ข','ค','ง'];
+  r.detail.forEach(function (d, idx) {
+    var c = document.createElement('div'); c.className = 'card'; c.style.marginBottom = '10px';
+    var h = document.createElement('div'); h.className = 'qnum'; h.textContent = 'ข้อ ' + (idx + 1);
+    var q = document.createElement('div');
+    q.style.cssText = 'font-size:13.5px;font-weight:400;line-height:1.6;margin-bottom:11px';
+    q.textContent = (ST.qs[idx] && ST.qs[idx].question) || '';
+    c.appendChild(h); c.appendChild(q);
+
+    [d.picked, d.correct].forEach(function (oi, k) {
+      if (oi < 0) return;
+      if (k === 1 && d.right) return;
+      var row = document.createElement('div');
+      row.className = 'opt ' + (k === 0 ? (d.right ? 'right' : 'wrong') : 'right');
+      row.style.cursor = 'default';
+      var u = document.createElement('u'); u.textContent = letters[oi];
+      var sp = document.createElement('span');
+      sp.textContent = ((ST.qs[idx] && ST.qs[idx].options[oi]) || '') + (k === 0 ? ' (คำตอบของคุณ)' : ' (เฉลย)');
+      row.appendChild(u); row.appendChild(sp); c.appendChild(row);
+    });
+
+    var e = document.createElement('div'); e.className = 'exp ' + (d.right ? 'g' : 'r');
+    var eb = document.createElement('b'); eb.textContent = d.right ? '✓ ตอบถูก' : '✕ ตอบผิด';
+    var ep = document.createElement('p'); ep.textContent = d.explain || '';
+    e.appendChild(eb); e.appendChild(ep); c.appendChild(e);
+    list.appendChild(c);
+  });
+
+  var act = $('resActions'); act.textContent = '';
+  if (pass) {
+    var b1 = document.createElement('button'); b1.type = 'button'; b1.className = 'btn ok';
+    b1.textContent = '◆ รับใบประกาศ';
+    b1.addEventListener('click', openCert); act.appendChild(b1);
+  } else {
+    var b2 = document.createElement('button'); b2.type = 'button'; b2.className = 'btn';
+    b2.textContent = '↻ ทำแบบประเมินอีกครั้ง';
+    b2.addEventListener('click', function () { $('btnQuiz').click(); });
+    act.appendChild(b2);
+  }
+  var b3 = document.createElement('button'); b3.type = 'button'; b3.className = 'btn ghost';
+  b3.style.marginTop = '10px'; b3.textContent = 'กลับหน้ารับชม';
+  b3.addEventListener('click', function () { show('s-watch'); paintWatch(); });
+  act.appendChild(b3);
+}
+
+/* ------------------------------ ใบประกาศ ----------------------------- */
+function openCert() {
+  api('cert', {}).then(function (r) {
+    if (!r.ok) return toast('ยังไม่มีใบประกาศ');
+    var c = r.cert;
+    show('s-cert');
+    $('cName').textContent = c.name;
+    $('cMeta').textContent = 'รหัสนักศึกษา ' + c.studentId + ' · ชั้นปีที่ ' + c.year;
+    $('cVideo').textContent = '“' + c.videoTitle + '”';
+    $('cScore').textContent = c.score;
+    $('cDate').textContent = thaiDate(c.issuedAt);
+    $('cNo').textContent = 'เลขที่ ' + c.certNo + ' · สแกนเพื่อตรวจสอบ';
+    var box = $('cQr'); box.textContent = '';
+    try {
+      var url = location.origin + location.pathname + '?v=' + encodeURIComponent(c.certNo);
+      var q = qrcode(0, 'M'); q.addData(url); q.make();
+      box.innerHTML = q.createImgTag(4, 0, 'QR ตรวจสอบใบประกาศ');  // data URI ที่สร้างในเครื่อง
+    } catch (e) {}
+  });
+}
+
+function certCanvas() {
+  return html2canvas($('certBox'), { scale: 2, backgroundColor: '#FFFDF8', useCORS: false, logging: false });
+}
+$('btnPng').addEventListener('click', function () {
+  toast('กำลังสร้างไฟล์ภาพ…');
+  certCanvas().then(function (cv) {
+    var a = document.createElement('a');
+    a.download = 'certificate-' + ($('cNo').textContent.replace(/[^A-Za-z0-9\-]/g, '') || 'rson') + '.png';
+    a.href = cv.toDataURL('image/png');
+    a.click();
+  }).catch(function () { toast('สร้างไฟล์ไม่สำเร็จ ลองแคปหน้าจอแทนได้'); });
+});
+$('btnPdf').addEventListener('click', function () {
+  toast('กำลังสร้างไฟล์ PDF…');
+  certCanvas().then(function (cv) {
+    var jsPDF = window.jspdf.jsPDF;
+    var pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    var w = 170, h = cv.height * w / cv.width;
+    pdf.addImage(cv.toDataURL('image/png'), 'PNG', 20, Math.max(15, (297 - h) / 2), w, h);
+    pdf.save('certificate-rson-fire.pdf');
+  }).catch(function () { toast('สร้าง PDF ไม่สำเร็จ ลองดาวน์โหลด PNG แทน'); });
+});
+$('btnHome').addEventListener('click', function () { show('s-watch'); paintWatch(); });
+
+/* ---------------------------- ตรวจสอบใบประกาศ ------------------------ */
+function doVerify() {
+  var no = $('vNo').value.trim();
+  if (!no) return toast('กรอกเลขที่ใบประกาศ');
+  var box = $('vResult'); box.textContent = '';
+  api('verify', { certNo: no }).then(function (r) {
+    var c = document.createElement('div'); c.className = 'card';
+    if (!r.ok) { var p0 = document.createElement('p'); p0.className = 'sub'; p0.textContent = 'ตรวจสอบไม่สำเร็จ'; c.appendChild(p0); box.appendChild(c); return; }
+    if (!r.found) {
+      var bd = document.createElement('span'); bd.className = 'badge w'; bd.textContent = 'ไม่พบใบประกาศนี้';
+      c.appendChild(bd); box.appendChild(c); return;
+    }
+    var bd2 = document.createElement('span'); bd2.className = 'badge p';
+    bd2.textContent = r.status === 'ACTIVE' ? '✓ ใบประกาศถูกต้อง' : 'สถานะ: ' + r.status;
+    c.appendChild(bd2);
+    [['ชื่อ–นามสกุล', r.name], ['รหัสนักศึกษา', r.studentIdMasked], ['ชั้นปี', String(r.year)],
+     ['สื่อที่รับชม', r.videoTitle], ['เลขที่', r.certNo],
+     ['วันที่ออก', new Date(r.issuedAt).toLocaleDateString('th-TH')]].forEach(function (kv) {
+      var d = document.createElement('div'); d.className = 'kv';
+      var s1 = document.createElement('span'); s1.textContent = kv[0];
+      var s2 = document.createElement('b'); s2.textContent = kv[1];
+      d.appendChild(s1); d.appendChild(s2); c.appendChild(d);
+    });
+    box.appendChild(c);
+  });
+}
+$('btnVerify').addEventListener('click', doVerify);
+
+boot();
+</script>
+</body>
+</html>
